@@ -3,11 +3,11 @@ import NavbarPrivate from "../components/NavbarPrivate"
 
 
 
-export const Post = () =>{
+export const Profile = () =>{
     return (
         <>
         <NavbarPrivate/>
-        <h1>hola desde el Post</h1>
+        <h1>hola desde el Profile</h1>
         </>
     )
 }

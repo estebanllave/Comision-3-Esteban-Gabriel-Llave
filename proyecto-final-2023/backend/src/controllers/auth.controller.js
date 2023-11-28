@@ -2,13 +2,24 @@
 
 import User from "../models/user.models.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken"
+
 // importo para hacer la forma 2
 import { createAccesToken } from "../middlewares/jwt.validator.js";
+// para verificar el token pedido desde el frond
+import jwt from "jsonwebtoken"
+import {settingDotEnvSecret} from "../config/dotenv.js"
+
+
 
 // registro de usuario
 export const register = async (req, res) => {
   const { username, email, password } = req.body;
+  // validar el usuario 
+  const userFound = await User.findOne({email})
+  if(userFound) return res.status(400).json(["Email usado"])
+
+
+  
   try {
     // encriptar contraseña
     const passwordHash = await bcrypt.hash(password, 10);
@@ -61,12 +72,12 @@ export const login = async (req,res) => {
     const {email,password} = req.body
     try {
         const userFound = await User.findOne({email})
-        if(!userFound) return res.status(400).json({menssage: "usuario no encontrado"})
+        if(!userFound) return res.status(400).json(["Error en las Credenciales"])
 
     // comparamos password
     const match = await bcrypt.compare(password, userFound.password)
 
-    if(!match) return res.status(400).json({message:"contraseña incorrecta"})
+    if(!match) return res.status(400).json(["Error en las Credenciales"])
 
     // genero nuevamente el token 
         // TOKEN: forma 2
@@ -108,4 +119,24 @@ export const profile = async (req,res) =>{
     } catch (error) {
       res.status(500).json({message: "Error al cargar perfil", error})
     }
+}
+
+const {secret} = settingDotEnvSecret();
+export const verifyToken = async (req,res) =>{
+  const {token} = req.cookies
+  if(!token) return res.status(400).json({message:"No autorizado"});
+
+  jwt.verify(token,secret,async(err,user) =>{
+    if(err) return res.status(400).json({message:"No autorizado"});
+
+    const userFound = await User.findById(user.id);
+    if(!userFound) return res.status(400).json({message:"No autorizado"});
+
+    return res.json({
+      id: userFound._id,
+      usename: userFound.username,
+      email: userFound.email
+    });
+
+  });
 }

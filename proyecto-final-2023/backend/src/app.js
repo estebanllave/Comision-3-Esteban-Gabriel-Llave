@@ -19,7 +19,11 @@ export const app = express()
 connectMongo();
 
 app.use(morgan("tiny"));
-app.use(cors());
+// para poder usarlo en el fronten con las cookies
+app.use(cors({
+    origin:"http://localhost:5173",
+    credentials: true,
+}));
 app.use(express.json());
 app.use(cookieParser());
 

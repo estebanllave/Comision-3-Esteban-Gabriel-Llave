@@ -1,15 +1,21 @@
 // pedidos al servidor
-import axios from "axios"
+import axios from "./setCredentials"
 
-// url al server
-const API ="http://localhost:3000"
+
+
+
+
+
 // config de la conexion
 
 // registrarse
-export const registerReq = (user) =>  axios.post(`${API}/register`,user);
+export const registerReq = (user) =>  axios.post(`/register`,user);
 
 // logearse
-export const loginReq = (user) =>  axios.post(`${API}/login`,user);
+export const loginReq = (user) =>  axios.post(`/login`,user);
+
+// verifico desde el backend el token
+export const verifyToken = () =>axios.get(`/verifyToken`)
 
 
 // export const registerReq = (user) => {

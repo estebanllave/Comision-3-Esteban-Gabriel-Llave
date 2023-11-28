@@ -1,6 +1,6 @@
 // ENDPOINTS DEL SERVIDOR
 import { Router } from "express";
-import {login,logout,profile,register} from "../controllers/auth.controller.js"
+import {login,logout,profile,register, verifyToken} from "../controllers/auth.controller.js"
 import { authRequired } from "../middlewares/validateToken.js";
 import {handleErrorValidations,validateLogin,validateRegister} from "../middlewares/validateAuth.js"
 
@@ -15,4 +15,7 @@ routes.post("/login",validateLogin,handleErrorValidations,login);
 routes.post("/logout",logout);
 // profile
 routes.get("/profile",authRequired ,profile);
+
+// verificar token pedido del front
+routes.get("/verifyToken", verifyToken);
 export default routes;

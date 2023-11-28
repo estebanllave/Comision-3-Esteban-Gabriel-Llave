@@ -4,6 +4,7 @@ import {useAuth} from "../context/AuthContext"
 // para re dirigir una vez logeado
 import {useNavigate} from "react-router-dom"
 import { useEffect } from "react";
+import NavbarPublic from "../components/NavbarPublic";
 
 
 export const Login = () =>{
@@ -26,6 +27,8 @@ export const Login = () =>{
     } )
 
         return (
+          <>
+          <NavbarPublic/>
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               {/* <img
@@ -62,7 +65,8 @@ export const Login = () =>{
                     />
                   </div>
                 </div>
-    
+                {errors.email && (
+                <p className="text-red-400">Email requerido</p>)}
                 <div>
                   <div className="flex items-center justify-between">
                     <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
@@ -83,7 +87,8 @@ export const Login = () =>{
                     />
                   </div>
                 </div>
-    
+                {errors.password && (
+                <p className="text-red-400">Password requerido</p>)}
                 <div>
                   <button
                     onClick={onSumit}
@@ -100,7 +105,7 @@ export const Login = () =>{
 
             </div>
           </div>
-
+          </>
         )
 
 

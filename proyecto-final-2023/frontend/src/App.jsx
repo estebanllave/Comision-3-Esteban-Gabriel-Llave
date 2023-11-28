@@ -3,16 +3,26 @@ import { Register } from "./pages/Register";
 import { AuthProvider } from "./context/AuthContext";
 import { Login } from "./pages/Login";
 import { Post } from "./pages/Post";
+import { PrivateRoutes } from "./routes/PrivateRoutes";
+import { Home } from "./pages/Home";
+import { Profile } from "./pages/Profile";
+// import NavbarPublic from "./components/NavbarPublic";
 const App = () => {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<h1>Home</h1>} />
-          <Route path="/login" element={<Login/>}/>
+          
+          {/* rutas publicas */}
+          <Route path="/" element={<Home/>} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/post" element={<Post/>} />
-          <Route path="/profile" element={<h1>Profile</h1>} />
+
+          {/* rutas privadas */}
+          <Route element={<PrivateRoutes/>}>
+            <Route path="/post" element={<Post />} />
+            <Route path="/profile" element={<Profile/>} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

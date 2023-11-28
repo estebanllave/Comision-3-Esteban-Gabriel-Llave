@@ -1,7 +1,10 @@
 
-import {createContext,useContext,useState} from "react";
+import {createContext,useContext,useEffect,useState} from "react";
 // importo la conexion a DB de register
-import {registerReq,loginReq} from "../api/auth"
+import {registerReq,loginReq, verifyToken} from "../api/auth"
+import Cookies from "js-cookie"
+
+
 
 export const AuthContext = createContext()
 
@@ -49,11 +52,55 @@ export const AuthProvider = ({children}) =>{
     }
 
 
+    // efecto para manejar el tiempo de los errores
+    useEffect(()=>{
+        if (errors.length > 0){
+            const timer = setTimeout(()=>{
+                setErrors([])
+            },3000)
+            return () => clearTimeout(timer)
+        }
+    },[errors])
+
+    // manejo de las cookies
+    useEffect(() => {
+        async function verifyLogin(){
+            const cookie = Cookies.get();
+            if(cookie.token){
+               try {
+                  const res = await verifyToken(cookie.token)
+                //   console.log(res);
+                  if(res.data){
+                    setIsAuth(true)
+                    setUser(res.data)
+                  }else{
+                    setIsAuth(false)
+                  }
+               } catch (error) {
+                //  console.log(error);  
+                 setIsAuth(false);
+                 setUser(null);
+               }
+            }
+        }
+        verifyLogin()
+     
+    },[])
+
+    // salir logout
+    const signout = () =>{
+        Cookies.remove("token")
+        setIsAuth(false)
+        setUser(null)
+    }
+    
+
     return(
         <AuthContext.Provider
         value={{
             signup,
             signin,
+            signout,
             isAuth,
             user,
             errors,
