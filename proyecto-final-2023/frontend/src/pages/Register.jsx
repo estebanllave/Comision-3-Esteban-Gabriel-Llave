@@ -2,8 +2,9 @@
 import { useForm } from "react-hook-form";
 // traigo useAuth para pasarlo
 import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavbarPublic from "../components/NavbarPublic";
+import { useEffect } from "react";
 // import {registerReq} from "../api/auth.js"
 
 export const Register = () => {
@@ -14,7 +15,12 @@ export const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const { signup, errors: loginErrors } = useAuth();
+  const { signup, isAuth, errors: loginErrors } = useAuth();
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(isAuth) navigate("/post");
+  },[isAuth])
 
   const onSumit = handleSubmit(async (values) => {
     // conexion al servidor y a la DB

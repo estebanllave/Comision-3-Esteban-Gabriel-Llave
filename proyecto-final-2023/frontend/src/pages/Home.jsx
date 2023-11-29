@@ -16,16 +16,23 @@ export const Home = () => {
     return (
       <>
         <NavbarPublic />
-        <h1>No tienes Post</h1>
+
+        <div className="flex items-center justify-center">
+          <h1 className="text-4xl font-bold text-red-500">
+            😢 ¡Oh no! No tienes posteos disponibles.
+          </h1>
+        </div>
       </>
     );
 
   return (
     <>
-      <NavbarPublic/>
+      <NavbarPublic />
       <br />
       <div className="flex items-center justify-center">
-        <h1>Posteos</h1>
+        <h1 className="text-4xl font-bold text-indigo-700">
+          🚀 ¡Descubre los Posteos!
+        </h1>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {post.map((post, i) => (

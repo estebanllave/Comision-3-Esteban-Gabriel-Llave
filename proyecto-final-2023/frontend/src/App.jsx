@@ -9,12 +9,14 @@ import { NewPost } from "./pages/NewPost";
 import { Profile } from "./pages/Profile";
 import { PostProvider } from "./context/PostContext";
 import { UpdatePost } from "./pages/UpdatePost";
+import { CommentProvider } from "./context/CommentContext";
 
 // import NavbarPublic from "./components/NavbarPublic";
 const App = () => {
   return (
     <AuthProvider>
       <PostProvider>
+        <CommentProvider>
         <BrowserRouter>
           <Routes>
             {/* rutas publicas */}
@@ -31,6 +33,7 @@ const App = () => {
             {/* </Route> */}
           </Routes>
         </BrowserRouter>
+        </CommentProvider>
       </PostProvider>
     </AuthProvider>
   );

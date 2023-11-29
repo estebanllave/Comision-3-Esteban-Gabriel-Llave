@@ -22,17 +22,21 @@ export const Post = () => {
     return (
       <>
         <NavbarPrivate />
+        <div className="flex items-center justify-center">
+  <h1 className="text-4xl font-bold text-gray-600">
+    🌧 ¡Oh no! Parece que no tienes posteos disponibles.
+  </h1>
+</div>
       </>
     );
 
   return (
     <>
       <NavbarPrivate />
-      <h1>hola desde el post</h1>
       <br />
       <div className="flex items-center justify-center">
-        <h1>Posteos</h1>
-      </div>
+  <h1 className="text-4xl font-bold text-indigo-700">¡Descubre Tus Posteos!</h1>
+</div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {userPosts.map((userPosts, i) => (
           <div key={i} className="min-w-[900px]">
