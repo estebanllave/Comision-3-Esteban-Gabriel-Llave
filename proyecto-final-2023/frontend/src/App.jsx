@@ -5,26 +5,33 @@ import { Login } from "./pages/Login";
 import { Post } from "./pages/Post";
 import { PrivateRoutes } from "./routes/PrivateRoutes";
 import { Home } from "./pages/Home";
+import { NewPost } from "./pages/NewPost";
 import { Profile } from "./pages/Profile";
+import { PostProvider } from "./context/PostContext";
+import { UpdatePost } from "./pages/UpdatePost";
+
 // import NavbarPublic from "./components/NavbarPublic";
 const App = () => {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          
-          {/* rutas publicas */}
-          <Route path="/" element={<Home/>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+      <PostProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* rutas publicas */}
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
-          {/* rutas privadas */}
-          <Route element={<PrivateRoutes/>}>
-            <Route path="/post" element={<Post />} />
-            <Route path="/profile" element={<Profile/>} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            {/* rutas privadas */}
+            {/* <Route element={<PrivateRoutes />}> */}
+              <Route path="/post" element={<Post />} />
+              <Route path="/add-post" element={<NewPost />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/postupdate/:id" element={<UpdatePost/>}/>
+            {/* </Route> */}
+          </Routes>
+        </BrowserRouter>
+      </PostProvider>
     </AuthProvider>
   );
 };

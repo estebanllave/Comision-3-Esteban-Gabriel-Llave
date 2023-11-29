@@ -3,6 +3,7 @@ import {
   createPost,
   deletePost,
   getAllPost,
+  getAllPostByIdUser,
   getPostById,
   updatePost,
 } from "../controllers/post.controller.js";
@@ -21,6 +22,8 @@ postRoutes.get("/post/:postId", authRequired, getPostById);
 postRoutes.put("/post/:postId", authRequired,updatePost);
 // eliminar post
 postRoutes.delete("/post/:postId", authRequired,deletePost);
+// buscar post por id del usuario
+postRoutes.get("/posts/:postId",authRequired ,getAllPostByIdUser)
 
 // exporto la ruta
 export default postRoutes;

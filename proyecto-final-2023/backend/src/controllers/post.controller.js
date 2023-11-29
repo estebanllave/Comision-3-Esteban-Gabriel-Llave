@@ -1,6 +1,7 @@
 
 import Post from "../models/post.models.js"
-import Comment from "../models/comment.models.js"
+// import Comment from "../models/comment.models.js"
+import User from "../models/user.models.js"
 
 // crear Post
 export const createPost =async (req,res) =>{
@@ -42,9 +43,22 @@ export const getPostById =async (req,res) =>{
         const post = await Post.findById(postId);
         res.status(200).json(post)
     } catch (error) {
-        
+        console.log(error);
     }
 }
+
+// buscar Post por id de Usuario
+export const getAllPostByIdUser = async (req,res) =>{
+    const {userId} = req.params
+    try {
+        const posts = await Post.find(userId)
+        res.status(200).json(posts)
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 // modificar Post
 
 export const updatePost =async (req,res) =>{  
