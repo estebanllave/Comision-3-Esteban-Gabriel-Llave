@@ -10,14 +10,15 @@ export const Post = () => {
   const { user } = useAuth();
   // console.log(user.id);
   const { post, getAllPost, deletePost } = usePosts();
+  
 
   // Verificar que user tenga un valor antes de usarlo
   useEffect(() => {
     getAllPost();
   }, []);
-  console.log(post);
+  // console.log(post);
   const userPosts = post.filter((post) => post.user === user.id);
-  console.log(userPosts);
+  // console.log(userPosts);
 
   if (userPosts.length === 0)
     return (

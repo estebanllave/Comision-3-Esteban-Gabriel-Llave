@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useComment } from "../context/CommentContext";
 
+
 export const CommentForm = ({postId}) => {
   
   const { user } = useAuth();
@@ -17,7 +18,7 @@ export const CommentForm = ({postId}) => {
     // Verificar que el usuario esté autenticado
     if (!user) {
       console.log("Usuario no autenticado");
-      setComment(false)
+      // setComment(false)
       return;
     }
 

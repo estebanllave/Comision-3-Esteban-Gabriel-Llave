@@ -39,6 +39,22 @@ export const CommentProvider = ({ children }) => {
     };
 
   // buscar
+//   const getAllComment = async () => {
+//   try {
+//     const comments = await getAllCommentReq(); // Obtén comentarios de tu API
+//     const populatedComments = await Promise.all(
+//       comments.map(async (comment) => {
+//         const user = await getUserByIdReq(comment.user); // Obtén información de usuario por ID
+//         const post = await getPostByIdReq(comment.post); // Obtén información de publicación por ID
+//         return { ...comment, user, post };
+//       })
+//     );
+//     setComment(populatedComments);
+//   } catch (error) {
+//     console.error("Error al obtener comentarios", error);
+//   }
+// };
+
   const getAllComment = async () => {
     const res = await getAllCommentReq();
     // console.log(res);

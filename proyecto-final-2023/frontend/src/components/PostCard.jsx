@@ -1,14 +1,10 @@
-// import { useEffect } from "react";
-import { useEffect } from "react";
+
 import { CommentForm } from "../components/CommentForm";
-import { useComment } from "../context/CommentContext";
+
+
+
 
 export const PostCard = ({ post }) => {
-  const { getAllComment } = useComment();
-console.log("hola dede el PostCar" ,{post});
-  useEffect(() => {
-    getAllComment();
-  }, []);
 
   return (
     <div className="py-10 sm:py-16">
@@ -44,7 +40,7 @@ console.log("hola dede el PostCar" ,{post});
                   {post.comments.map((comment, i) => (
                     <div key={i} className="mb-3">
                       <p className="text-sm font-semibold text-gray-900">
-                        {comment.author}
+                       De: {}
                       </p>
                       <p className="text-sm text-gray-700">
                         {comment.description}
@@ -53,11 +49,9 @@ console.log("hola dede el PostCar" ,{post});
                     </div>
                   ))}
                 </div>
-
-
               </div>
-                              {/* Formulario de Comentario */}
-                              <CommentForm postId={post} />
+              {/* Formulario de Comentario */}
+              <CommentForm postId={post} />
             </article>
           </div>
         </div>

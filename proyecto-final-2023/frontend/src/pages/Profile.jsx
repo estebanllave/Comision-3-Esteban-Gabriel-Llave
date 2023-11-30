@@ -1,3 +1,4 @@
+
 import { Footer } from "../components/Footer";
 import NavbarPrivate from "../components/NavbarPrivate"
 // import NavbarPublic from "../components/NavbarPublic";
