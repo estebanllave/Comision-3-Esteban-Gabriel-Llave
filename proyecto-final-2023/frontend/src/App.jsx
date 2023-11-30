@@ -10,6 +10,7 @@ import { Profile } from "./pages/Profile";
 import { PostProvider } from "./context/PostContext";
 import { UpdatePost } from "./pages/UpdatePost";
 import { CommentProvider } from "./context/CommentContext";
+import { HomePublic } from "./pages/HomePublic";
 
 // import NavbarPublic from "./components/NavbarPublic";
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             {/* rutas publicas */}
+            <Route path="/home" element={<HomePublic/>} />
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
