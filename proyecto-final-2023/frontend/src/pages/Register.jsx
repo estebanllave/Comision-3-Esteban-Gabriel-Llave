@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import NavbarPublic from "../components/NavbarPublic";
 import { useEffect } from "react";
+import { Footer } from "../components/Footer";
 // import {registerReq} from "../api/auth.js"
 
 export const Register = () => {
@@ -142,6 +143,7 @@ export const Register = () => {
           </p>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

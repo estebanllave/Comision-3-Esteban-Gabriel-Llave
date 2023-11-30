@@ -161,6 +161,7 @@ export const UpdatePost = () => {
           </form>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

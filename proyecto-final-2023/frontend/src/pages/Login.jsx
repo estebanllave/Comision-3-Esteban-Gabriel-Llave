@@ -5,6 +5,7 @@ import {useAuth} from "../context/AuthContext"
 import {useNavigate} from "react-router-dom"
 import { useEffect } from "react";
 import NavbarPublic from "../components/NavbarPublic";
+import { Footer } from "../components/Footer";
 
 
 export const Login = () =>{
@@ -105,6 +106,7 @@ export const Login = () =>{
 
             </div>
           </div>
+          <Footer/>
           </>
         )
 

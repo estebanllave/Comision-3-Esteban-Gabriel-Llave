@@ -3,6 +3,7 @@ import NavbarPrivate from "../components/NavbarPrivate";
 import { usePosts } from "./../context/PostContext";
 import { PostCardPrivate } from "../components/PostCardPrivate";
 import { useAuth } from "../context/AuthContext";
+import { Footer } from "../components/Footer";
 
 
 export const Post = () => {
@@ -44,6 +45,7 @@ export const Post = () => {
           </div>
         ))}
       </div>
+      <Footer/>
     </>
   );
 };

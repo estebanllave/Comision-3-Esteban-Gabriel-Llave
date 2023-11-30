@@ -21,11 +21,22 @@ export const CommentProvider = ({ children }) => {
   const [comment, setComment] = useState([]);
 
   // Crear Comentario
-  const createComment = async (comment) => {
-    const res = await createCommentReq(comment);
-    // Actualizar el estado con el nuevo comentario
-    setComment([...comment, res.data]);
-  };
+  // const createComment = async (comment) => {
+  //   const res = await createCommentReq(comment);
+  //   // Actualizar el estado con el nuevo comentario
+  //   setComment(...comment, res.data);
+  // };
+  const createComment = async (commentData) => {
+  
+  
+    try {
+        const res = await createCommentReq(commentData);
+        // Actualizar el estado con el nuevo comentario
+        setComment((prevComments) => [...prevComments, res.data]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
   // buscar
   const getAllComment = async () => {

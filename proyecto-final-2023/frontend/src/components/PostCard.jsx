@@ -4,9 +4,8 @@ import { CommentForm } from "../components/CommentForm";
 import { useComment } from "../context/CommentContext";
 
 export const PostCard = ({ post }) => {
-  const { comment, getAllComment } = useComment();
-  console.log(comment.post);
-  console.log(getAllComment);
+  const { getAllComment } = useComment();
+console.log("hola dede el PostCar" ,{post});
   useEffect(() => {
     getAllComment();
   }, []);
@@ -58,7 +57,7 @@ export const PostCard = ({ post }) => {
 
               </div>
                               {/* Formulario de Comentario */}
-                              <CommentForm postId={post.id} />
+                              <CommentForm postId={post} />
             </article>
           </div>
         </div>

@@ -1,40 +1,42 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useComment } from "../context/CommentContext";
-import { usePosts } from "../context/PostContext";
 
-export const CommentForm = () => {
+export const CommentForm = ({postId}) => {
+  
   const { user } = useAuth();
-  const { postId } = usePosts;
+ 
   const { createComment } = useComment();
   const [commentText, setCommentText] = useState("");
 
+
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
     // Verificar que el usuario esté autenticado
     if (!user) {
-      // Puedes mostrar un mensaje de error o redirigir a la página de inicio de sesión
       console.log("Usuario no autenticado");
+      setComment(false)
       return;
     }
 
     // Crear el comentario
     await createComment({
-      postId,
-      userId: user.id,
-      text: commentText,
+      post: postId._id,
+      user: user.id,
+      description: commentText,
     });
-
-    // Limpiar el campo de comentario después de enviar
+    // Limpia el campo de comentario después de enviar
     setCommentText("");
+
   };
 
   return user? (
     <div
       style={{ border: "1px solid #ccc", padding: "10px", borderRadius: "8px" }}
     >
-      <form onSubmit={handleSubmit}>
+      <form >
         <textarea
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
@@ -47,8 +49,9 @@ export const CommentForm = () => {
             border: "1px solid #ddd",
           }}
         />
-        <button
-          type="submit"
+      </form>
+      <button
+          onClick={handleSubmit}
           style={{
             backgroundColor: "#4CAF50",
             color: "white",
@@ -59,7 +62,6 @@ export const CommentForm = () => {
         >
           Comentar
         </button>
-      </form>
     </div>
   ): null
 };

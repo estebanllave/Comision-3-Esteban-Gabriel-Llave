@@ -4,6 +4,7 @@ import { usePosts } from "../context/PostContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import { Footer } from "../components/Footer";
 
 export const NewPost = () => {
   const { register, handleSubmit, setValue } = useForm();
@@ -49,10 +50,10 @@ export const NewPost = () => {
       <NavbarPrivate />
 
       <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-white bg-opacity-80 p-10 rounded-md shadow-lg">
+        <div className="bg-white bg-opacity-65 p-5 rounded-md shadow-lg">
           <form onSubmit={onSubmit}>
-            <div className="space-y-12">
-              <div className="border-b border-gray-900/10 pb-12">
+            <div className="space-y-5">
+              <div className="border-b border-gray-900/20 pb-5">
                 <h2 className="text-base font-semibold leading-7 text-gray-900">
                   Crear Nuevo Posteo
                 </h2>
@@ -150,6 +151,7 @@ export const NewPost = () => {
           </form>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

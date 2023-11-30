@@ -1,3 +1,4 @@
+import { Footer } from "../components/Footer";
 import NavbarPrivate from "../components/NavbarPrivate"
 // import NavbarPublic from "../components/NavbarPublic";
 import { useAuth } from "../context/AuthContext";
@@ -10,6 +11,7 @@ export const Profile = () => {
         {/* <NavbarPublic/> */}
         <div>Profile</div>
         {JSON.stringify(user, null, 3)}
+        <Footer/>
       </>
     );
   };

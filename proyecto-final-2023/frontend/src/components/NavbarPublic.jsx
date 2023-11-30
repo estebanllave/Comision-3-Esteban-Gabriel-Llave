@@ -87,8 +87,11 @@ export default function NavbarPublic() {
               ))}
             </div>
           </Disclosure.Panel>
+          
         </>
+        
       )}
     </Disclosure>
+    
   );
 }

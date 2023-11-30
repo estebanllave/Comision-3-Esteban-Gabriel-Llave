@@ -3,6 +3,7 @@ import { usePosts } from "./../context/PostContext";
 import { PostCard } from "../components/PostCard";
 
 import NavbarPublic from "./../components/NavbarPublic";
+import { Footer } from "../components/Footer";
 
 export const Home = () => {
   const { getAllPost, post } = usePosts();
@@ -41,6 +42,7 @@ export const Home = () => {
           </div>
         ))}
       </div>
+      <Footer/>
     </>
   );
 };

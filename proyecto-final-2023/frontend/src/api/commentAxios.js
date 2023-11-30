@@ -5,7 +5,7 @@ export const getAllCommentReq = () => axios.get(`/comment`)
 
 export const getCommentByIdReq = (id) => axios.get(`/comment/${id}`)
 
-export const createCommentReq = (comment) => axios.Comment(`/comment`,comment)
+export const createCommentReq = (comment) => axios.post(`/comment`,comment)
 
 export const updateCommentReq = (id,comment) => axios.put(`/comment/${id}`,comment)
 
