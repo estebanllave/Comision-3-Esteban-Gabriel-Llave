@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState } from "react";
 import {
   createCommentReq,
@@ -24,36 +23,39 @@ export const CommentProvider = ({ children }) => {
   // const createComment = async (comment) => {
   //   const res = await createCommentReq(comment);
   //   // Actualizar el estado con el nuevo comentario
-  //   setComment(...comment, res.data);
+  //   // setComment(...comment, res.data);
+  //   console.log("nuevo comentario");
+  //   console.log(comment);
   // };
+
   const createComment = async (commentData) => {
-  
-  
     try {
-        const res = await createCommentReq(commentData);
-        // Actualizar el estado con el nuevo comentario
-        setComment((prevComments) => [...prevComments, res.data]);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+      const res = await createCommentReq(commentData);
+      // Actualizar el estado con el nuevo comentario
+      setComment( prevComments => [...prevComments, res.data]);
+    } catch (error) {
+      console.log(error);
+    }
+    console.log("nuevo comentario");
+    console.log(commentData);
+  };
 
   // buscar
-//   const getAllComment = async () => {
-//   try {
-//     const comments = await getAllCommentReq(); // Obtén comentarios de tu API
-//     const populatedComments = await Promise.all(
-//       comments.map(async (comment) => {
-//         const user = await getUserByIdReq(comment.user); // Obtén información de usuario por ID
-//         const post = await getPostByIdReq(comment.post); // Obtén información de publicación por ID
-//         return { ...comment, user, post };
-//       })
-//     );
-//     setComment(populatedComments);
-//   } catch (error) {
-//     console.error("Error al obtener comentarios", error);
-//   }
-// };
+  //   const getAllComment = async () => {
+  //   try {
+  //     const comments = await getAllCommentReq(); // Obtén comentarios de tu API
+  //     const populatedComments = await Promise.all(
+  //       comments.map(async (comment) => {
+  //         const user = await getUserByIdReq(comment.user); // Obtén información de usuario por ID
+  //         const post = await getPostByIdReq(comment.post); // Obtén información de publicación por ID
+  //         return { ...comment, user, post };
+  //       })
+  //     );
+  //     setComment(populatedComments);
+  //   } catch (error) {
+  //     console.error("Error al obtener comentarios", error);
+  //   }
+  // };
 
   const getAllComment = async () => {
     const res = await getAllCommentReq();
@@ -88,9 +90,9 @@ export const CommentProvider = ({ children }) => {
   };
 
   // actualizar
-  const updateComment = async (id, post) => {
+  const updateComment = async (id, comment) => {
     try {
-      const res = await updateCommentReq(id, post);
+      const res = await updateCommentReq(id, comment);
     } catch (error) {
       console.log(error);
     }
@@ -112,35 +114,12 @@ export const CommentProvider = ({ children }) => {
   );
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // const CommentContext = createContext();
 
 // export const useComment = () => {
 //   const context = useContext(CommentContext);
 //   if (!context) throw new Error("Error en el contexto de comentarios");
- 
+
 //   return context;
 // };
 
@@ -211,4 +190,3 @@ export const CommentProvider = ({ children }) => {
 //     </CommentContext.Provider>
 //   );
 // };
-

@@ -1,43 +1,46 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useComment } from "../context/CommentContext";
+import { useNavigate } from "react-router-dom";
 
-
-export const CommentForm = ({postId}) => {
-  
+export const CommentForm = ({ postId }) => {
+  const navigate = useNavigate();
   const { user } = useAuth();
- 
-  const { createComment } = useComment();
+  const { createComment, updateComment } = useComment();
   const [commentText, setCommentText] = useState("");
-
-
-
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     // Verificar que el usuario esté autenticado
     if (!user) {
       console.log("Usuario no autenticado");
-      // setComment(false)
       return;
     }
 
+    if (commentText.length < 5) {
+      console.log("La descripción debe tener al menos 5 caracteres");
+      return;
+    }
+
+    navigate("/home");
     // Crear el comentario
     await createComment({
+      autor: user.usename,
       post: postId._id,
       user: user.id,
       description: commentText,
     });
     // Limpia el campo de comentario después de enviar
-    setCommentText("");
 
+    setCommentText("");
+    navigate("/");
   };
 
-  return user? (
+  return user ? (
     <div
       style={{ border: "1px solid #ccc", padding: "10px", borderRadius: "8px" }}
     >
-      <form >
+      <form>
         <textarea
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
@@ -52,17 +55,18 @@ export const CommentForm = ({postId}) => {
         />
       </form>
       <button
-          onClick={handleSubmit}
-          style={{
-            backgroundColor: "#4CAF50",
-            color: "white",
-            padding: "10px 15px",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-        >
-          Comentar
-        </button>
+        onClick={handleSubmit}
+        style={{
+          backgroundColor: "#4CAF50",
+          color: "white",
+          padding: "10px 15px",
+          borderRadius: "4px",
+          cursor: "pointer",
+        }}
+      >
+        Comentar
+      </button>
     </div>
-  ): null
+  ) : null;
 };
+

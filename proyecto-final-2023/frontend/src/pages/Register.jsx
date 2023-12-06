@@ -24,10 +24,6 @@ export const Register = () => {
   },[isAuth])
 
   const onSumit = handleSubmit(async (values) => {
-    // conexion al servidor y a la DB
-    // console.log(values);
-    // const res = await registerReq(values)
-    // console.log(res);
     signup(values);
   });
 
