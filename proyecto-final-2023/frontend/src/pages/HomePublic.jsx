@@ -14,6 +14,7 @@ export const HomePublic = () => {
   useEffect(() => {
     getAllPost();
   }, []);
+  
 
   if (post.length === 0)
     return (
