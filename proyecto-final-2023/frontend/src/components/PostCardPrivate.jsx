@@ -35,7 +35,6 @@ export const PostCardPrivate = ({post}) =>{
             <div className="flex gap-x-2 items-center">
   <button
     onClick={() => {
-      // console.log(task._id);
       deletePost(post._id);
     }}
     className="bg-red-400 text-white px-4 py-2 rounded-md"

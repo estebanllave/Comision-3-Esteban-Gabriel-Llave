@@ -3,10 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { usePosts } from "../context/PostContext";
 import NavbarPrivate from "../components/NavbarPrivate";
 import {useForm} from "react-hook-form"
+import { Footer } from "../components/Footer";
 
 export const UpdatePost = () => {
 
-    const {register,getValues} = useForm()
+    // const {register,getValues} = useForm()
 
     const { id } = useParams();
     const { getPostbyId, updatePost } = usePosts();

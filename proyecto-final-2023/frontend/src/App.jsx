@@ -18,23 +18,23 @@ const App = () => {
     <AuthProvider>
       <PostProvider>
         <CommentProvider>
-        <BrowserRouter>
-          <Routes>
-            {/* rutas publicas */}
-            <Route path="/home" element={<HomePublic/>} />
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+          <BrowserRouter>
+            <Routes>
+              {/* rutas publicas */}
+              <Route path="/home" element={<HomePublic />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
 
-            {/* rutas privadas */}
-            {/* <Route element={<PrivateRoutes />}> */}
-              <Route path="/post" element={<Post />} />
-              <Route path="/add-post" element={<NewPost />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/postupdate/:id" element={<UpdatePost/>}/>
-            {/* </Route> */}
-          </Routes>
-        </BrowserRouter>
+              {/* rutas privadas */}
+              {/* <Route element={<PrivateRoutes />}> */}
+                <Route index path="/" element={<Home />} />
+                <Route path="/post" element={<Post />} />
+                <Route path="/add-post" element={<NewPost />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/postupdate/:id" element={<UpdatePost />} />
+              {/* </Route> */}
+            </Routes>
+          </BrowserRouter>
         </CommentProvider>
       </PostProvider>
     </AuthProvider>

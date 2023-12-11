@@ -4,22 +4,27 @@ import Post from "../models/post.models.js";
 // crear comentario
 
 export const createComment = async (req, res) => {
-  const { post, description, publico } = req.body;
+  const { autor,post, description, publico } = req.body;
 
   try {
     const newComment = new Comment({
+      autor: autor,
       post: post,
       user: req.user.id,
       description: description,
       publico: publico,
     });
+    console.log("server");
+    console.log({newComment});
 
     await newComment.save();
+
 
     if (post) {
       console.log(post);
       try {
         const comentario = await Post.findById(post);
+        console.log("server comentario",comentario);
         comentario.comments.push(newComment.id); // Agrega el nuevo comentario al arreglo de comentarios
         await comentario.save(); // Guardar el documento modificado
         res.status(201).json({ message: "Comentario enviado con éxito" });

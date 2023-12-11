@@ -17,13 +17,13 @@ export const Login = () =>{
         // edecto para redirigir a Post uso el isAuth 
         const navigate = useNavigate()
         useEffect(()=>{
-            if(isAuth) navigate("/post")
+            if(isAuth) navigate("/")
         },[isAuth])
 
 
 
     const onSumit = handleSubmit(async (values) =>{
-        console.log(values);
+        console.log("desde onSumit",values);
         signin(values)
     } )
 

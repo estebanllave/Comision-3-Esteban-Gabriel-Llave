@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }) => {
       setErrors(error.response.data);
     }
   };
+
   // login
   const signin = async (user) => {
     try {
@@ -43,13 +44,6 @@ export const AuthProvider = ({ children }) => {
       // console.log(error.response.data);
       setErrors(error.response.data);
     }
-  };
-
-  // salir logout
-  const signout = () => {
-    Cookies.remove("token");
-    setIsAuth(false);
-    setUser(null);
   };
 
   // efecto para manejar el tiempo de los errores
@@ -63,29 +57,61 @@ export const AuthProvider = ({ children }) => {
   }, [errors]);
 
   // manejo de las cookies
-
   useEffect(() => {
     async function verifyLogin() {
-      const cookie = Cookies.get();
-      if (cookie.token) {
+      const token = Cookies.get("token");
+      if (token) {
         try {
-          const res = await verifyToken(cookie.token);
-          //   console.log(res);
+          const res = await verifyToken(token);
           if (res.data) {
             setIsAuth(true);
             setUser(res.data);
           } else {
+            console.log("hola desde el else de verify token");
             setIsAuth(false);
           }
         } catch (error) {
-          //  console.log(error);
           setIsAuth(false);
           setUser(null);
         }
       }
     }
+
     verifyLogin();
   }, []);
+
+
+
+
+  // salir logout
+  const signout = () => {
+    Cookies.remove("token");
+    setIsAuth(false);
+    setUser(null);
+  };
+
+  // para solucionar el problema de autenticacion
+  // const checkAuthentication = async () => {
+  //   const cookie = Cookies.get("token");
+  //   if (cookie) {
+  //     try {
+  //       const res = await verifyToken(cookie.token);
+  //       if (res.data) {
+  //         setIsAuth(true);
+  //         setUser(res.data);
+  //       } else {
+  //         setIsAuth(false);
+  //         setUser(null);
+  //       }
+  //     } catch (error) {
+  //       setIsAuth(false);
+  //       setUser(null);
+  //     }
+  //   } else {
+  //     setIsAuth(false);
+  //     setUser(null);
+  //   }
+  // };
 
   return (
     <AuthContext.Provider
@@ -93,6 +119,8 @@ export const AuthProvider = ({ children }) => {
         signup,
         signin,
         signout,
+        verifyToken,
+        // checkAuthentication,
         isAuth,
         user,
         errors,

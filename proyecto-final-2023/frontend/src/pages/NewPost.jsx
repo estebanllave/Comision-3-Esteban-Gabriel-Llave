@@ -49,8 +49,8 @@ export const NewPost = () => {
     <>
       <NavbarPrivate />
 
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="bg-white bg-opacity-65 p-5 rounded-md shadow-lg">
+      <div className="flex w-80vw h-50vh items-center justify-center min-h-screen">
+        <div className="bg-white bg-opacity-65 p-5 rounded-md shadow-lg ">
           <form onSubmit={onSubmit}>
             <div className="space-y-5">
               <div className="border-b border-gray-900/20 pb-5">
