@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { usePosts } from "./../context/PostContext";
-import { PostCard } from "../components/PostCard";
+import { Card } from "../components/Cards";
 
 // import NavbarPublic from "./../components/NavbarPublic";
 import { Footer } from "../components/Footer";
@@ -12,6 +12,7 @@ export const Home = () => {
   const { getAllPost, post } = usePosts();
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,17 +42,18 @@ export const Home = () => {
   if (post.length === 0)
     return (
       <>
+        <NavbarPrivate />
         <div className="flex items-center justify-center">
           <h2 className="text-4xl font-bold text-red-500">
             😢 ¡Oh no! No tienes posteos disponibles.
           </h2>
         </div>
+        <Footer />
       </>
     );
 
   return (
     <>
-      {console.log(user)}
       <NavbarPrivate />
       <br />
       <div className="flex items-center justify-center">
@@ -62,7 +64,7 @@ export const Home = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {post.map((post, i) => (
           <div key={i} className="min-w-[900px]">
-            <PostCard post={post} />
+            <Card post={post} />
           </div>
         ))}
       </div>

@@ -16,7 +16,7 @@ export const Post = () => {
   // console.log(post);
   const userPosts = post.filter((post) => post.user === user.id);
   // console.log(userPosts);
-  if (userPosts.length === 0)
+  if (userPosts.length < 1)
     return (
       <>
         <NavbarPrivate />

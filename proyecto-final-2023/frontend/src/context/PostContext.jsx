@@ -19,7 +19,7 @@ export const PostProvider = ({children}) =>{
 
     // crear Post
     const createPost = async(post)=>{
-        console.log(post)
+        // console.log(post)
         const res = await createPostReq(post)
     }
 

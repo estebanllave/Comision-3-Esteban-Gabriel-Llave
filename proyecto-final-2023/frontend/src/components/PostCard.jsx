@@ -1,8 +1,8 @@
-import { CommentForm } from "../components/CommentForm";
-import { useAuth } from "../context/AuthContext";
+import { CommentForm } from "./CommentForm";
+
 
 export const PostCard = ({ post }) => {
-  const { user } = useAuth();
+  
 
   return (
     <div className="py-10 sm:py-16">
@@ -10,7 +10,7 @@ export const PostCard = ({ post }) => {
         <div className="mx-auto max-w-7xl px-6 ">
           <div className="mx-auto mt-8 grid max-w-1xl grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             <article
-              key={post.id}
+              
               className="flex flex-col items-start max-w-sm bg-white bg-opacity-80 rounded-md overflow-hidden shadow-lg"
             >
               <div className="group relative ">
@@ -46,7 +46,7 @@ export const PostCard = ({ post }) => {
                 </div>
               </div>
               {/* Formulario de Comentario */}
-              <CommentForm postId={post} />
+              {/* <CommentForm postId={post} /> */}
             </article>
           </div>
         </div>

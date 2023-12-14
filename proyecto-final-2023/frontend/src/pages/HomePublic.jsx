@@ -14,16 +14,17 @@ export const HomePublic = () => {
   useEffect(() => {
     getAllPost();
   }, []);
-  
 
   if (post.length === 0)
     return (
       <>
+        <NavbarPublic />
         <div className="flex items-center justify-center">
           <h1 className="text-4xl font-bold text-red-500">
-            😢 ¡Oh no! No tienes posteos disponibles.
+            😢 ¡Oh no! No hay posteos disponibles!.
           </h1>
         </div>
+        <Footer />
       </>
     );
   return (

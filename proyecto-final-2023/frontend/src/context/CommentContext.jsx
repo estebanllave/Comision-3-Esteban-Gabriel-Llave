@@ -11,7 +11,6 @@ const CommentContext = createContext();
 
 export const useComment = () => {
   const context = useContext(CommentContext);
-  console.log(context);
   if (!context) throw new Error("Error en el contexto de comentarios");
   return context;
 };
@@ -19,14 +18,9 @@ export const useComment = () => {
 export const CommentProvider = ({ children }) => {
   const [comment, setComment] = useState([]);
 
-  // Crear Comentario
-  // const createComment = async (comment) => {
-  //   const res = await createCommentReq(comment);
-  //   // Actualizar el estado con el nuevo comentario
-  //   // setComment(...comment, res.data);
-  //   console.log("nuevo comentario");
-  //   console.log(comment);
-  // };
+  const [errors, setErrors] =  useState();
+
+
 
   const createComment = async (commentData) => {
     try {
@@ -34,28 +28,15 @@ export const CommentProvider = ({ children }) => {
       // Actualizar el estado con el nuevo comentario
       setComment( prevComments => [...prevComments, res.data]);
     } catch (error) {
+      setErrors(error.response.data)
       console.log(error);
     }
-    console.log("nuevo comentario");
-    console.log(commentData);
+    
+    // console.log("nuevo comentario");
+    // console.log(commentData);
   };
 
-  // buscar
-  //   const getAllComment = async () => {
-  //   try {
-  //     const comments = await getAllCommentReq(); // Obtén comentarios de tu API
-  //     const populatedComments = await Promise.all(
-  //       comments.map(async (comment) => {
-  //         const user = await getUserByIdReq(comment.user); // Obtén información de usuario por ID
-  //         const post = await getPostByIdReq(comment.post); // Obtén información de publicación por ID
-  //         return { ...comment, user, post };
-  //       })
-  //     );
-  //     setComment(populatedComments);
-  //   } catch (error) {
-  //     console.error("Error al obtener comentarios", error);
-  //   }
-  // };
+
 
   const getAllComment = async () => {
     const res = await getAllCommentReq();
@@ -71,7 +52,7 @@ export const CommentProvider = ({ children }) => {
   const deleteComment = async (id) => {
     try {
       const res = await deleteCommentReq(id);
-      console.log(res);
+      // console.log(res);
       if (res.status === 200)
         setComment(comment.filter((comment) => comment._id !== id));
     } catch (error) {
