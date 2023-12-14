@@ -4,7 +4,7 @@ import Post from "../models/post.models.js";
 // crear comentario
 
 export const createComment = async (req, res) => {
-  const { autor,post, description, publico } = req.body;
+  const { autor, post, description, publico } = req.body;
 
   try {
     const newComment = new Comment({
@@ -15,16 +15,15 @@ export const createComment = async (req, res) => {
       publico: publico,
     });
     console.log("server");
-    console.log({newComment});
+    console.log({ newComment });
 
     await newComment.save();
-
 
     if (post) {
       console.log(post);
       try {
         const comentario = await Post.findById(post);
-        console.log("server comentario",comentario);
+        console.log("server comentario", comentario);
         comentario.comments.push(newComment.id); // Agrega el nuevo comentario al arreglo de comentarios
         await comentario.save(); // Guardar el documento modificado
         res.status(201).json({ message: "Comentario enviado con éxito" });
@@ -42,12 +41,10 @@ export const createComment = async (req, res) => {
 // listar comentario
 export const listComments = async (req, res) => {
   try {
-    const comments = await Comment.find().populate(
-        "user"
-    )
+    const comments = await Comment.find().populate("user");
     res.json(comments);
   } catch (error) {
-    return res.json({ message: "Error al buscar el Comment",error });
+    return res.json({ message: "Error al buscar el Comment", error });
   }
 };
 
