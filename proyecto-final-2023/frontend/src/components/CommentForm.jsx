@@ -6,15 +6,17 @@ import { useNavigate } from "react-router-dom";
 export const CommentForm = ({ postId, onAddComment }) => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { createComment, updateComment } = useComment();
+  const { createComment} = useComment();
   const [commentText, setCommentText] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Verificar que el usuario esté autenticado
     if (!user) {
       console.log("Usuario no autenticado");
-
       return;
     }
 
@@ -23,23 +25,25 @@ export const CommentForm = ({ postId, onAddComment }) => {
       return;
     }
 
-    navigate("/home");
+    navigate("/");
+
+    setIsSubmitting(true)
     // Crear el comentario
     const newComment = await createComment({
       autor: user.usename,
       post: postId._id,
       user: user.id,
       description: commentText,
-    });
+      
+    }
+    
+    );
     // console.log(user);
     // Limpia el campo de comentario después de enviar
 
     setCommentText("");
 
-      console.log(newComment);
-    onAddComment(newComment);
-
-    navigate("/");
+    navigate("/home");
   };
 
 
@@ -87,8 +91,10 @@ export const CommentForm = ({ postId, onAddComment }) => {
             borderRadius: "4px",
             cursor: "pointer",
           }}
+          disabled={isSubmitting}
         >
           Comentar
+          {isSubmitting ? "Comentando..." : "Comentar"}
         </button>
       </div>
     </div>

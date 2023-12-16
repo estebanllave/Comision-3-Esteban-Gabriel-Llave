@@ -17,7 +17,7 @@ export const Login = () =>{
         // edecto para redirigir a Post uso el isAuth 
         const navigate = useNavigate()
         useEffect(()=>{
-            if(isAuth) navigate("/")
+            if(isAuth) navigate("/home")
         },[isAuth])
 
 

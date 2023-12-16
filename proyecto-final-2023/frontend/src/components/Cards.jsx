@@ -5,7 +5,7 @@ import { useComment } from "../context/CommentContext";
 
 export const Card = ({ post }) => {
   const { user } = useAuth();
-  const { deleteComment,createComment,updateComment } = useComment();
+  const { deleteComment, updateComment } = useComment();
   const [comments, setComments] = useState(post.comments);
 
   const handleDeleteComment = async (commentId) => {
@@ -17,14 +17,6 @@ export const Card = ({ post }) => {
       (comment) => comment._id !== commentId
     );
     setComments(updatedComments);
-  };
-
-  const handleAddComment = async (newComment) => {
-    // Lógica para agregar el comentario
-    const addedComment = await createComment(newComment);
-
-    // Actualizar el estado local después de la adición
-    setComments([...comments, addedComment]);
   };
 
   const handleEditComment = async (commentId, updatedDescription) => {
@@ -71,42 +63,49 @@ export const Card = ({ post }) => {
                   {/* Renderizar comentarios aquí */}
                   {comments.map((comment, i) => (
                     <div key={i} className="mb-3">
-                      <p className="text-sm font-semibold text-gray-900">
-                        Autor: {comment.autor}
-                      </p>
-                      <p className="text-sm text-gray-700">
-                        {comment.description}
-                      </p>
-                      {user.id === comment.user && (
-                        <div className="flex gap-2">
-                        <button
-                          onClick={() => handleDeleteComment(comment._id)}
-                          className="bg-red-400 text-white px-2 py-1 rounded-md text-sm" // Agregado: text-sm para reducir el tamaño del texto
-                        >
-                          Eliminar
-                        </button>
-                        <button
-                          onClick={() => {
-                            const updatedDescription = prompt(
-                              "Editar comentario:",
-                              comment.description
-                            );
-                            if (updatedDescription !== null) {
-                              handleEditComment(comment._id, updatedDescription);
-                            }
-                          }}
-                          className="bg-blue-500 text-white px-2 py-1 rounded-md text-sm" // Agregado: text-sm para reducir el tamaño del texto
-                        >
-                          Editar
-                        </button>
-                      </div>
+                      {comment && comment.autor && (
+                        <>
+                          <p className="text-sm font-semibold text-gray-900">
+                            Autor: {comment.autor}
+                          </p>
+                          <p className="text-sm text-gray-700">
+                            {comment.description}
+                          </p>
+                          {user.id === comment.user && (
+                            <div className="flex gap-2">
+                              <button
+                                onClick={() => handleDeleteComment(comment._id)}
+                                className="bg-red-400 text-white px-2 py-1 rounded-md text-sm" // Agregado: text-sm para reducir el tamaño del texto
+                              >
+                                Eliminar
+                              </button>
+                              <button
+                                onClick={() => {
+                                  const updatedDescription = prompt(
+                                    "Editar comentario:",
+                                    comment.description
+                                  );
+                                  if (updatedDescription !== null) {
+                                    handleEditComment(
+                                      comment._id,
+                                      updatedDescription
+                                    );
+                                  }
+                                }}
+                                className="bg-blue-500 text-white px-2 py-1 rounded-md text-sm" // Agregado: text-sm para reducir el tamaño del texto
+                              >
+                                Editar
+                              </button>
+                            </div>
+                          )}
+                        </>
                       )}
                     </div>
                   ))}
                 </div>
               </div>
               {/* Formulario de Comentario */}
-              <CommentForm postId={post} onAddComment={handleAddComment} />
+              <CommentForm postId={post} />
             </article>
           </div>
         </div>

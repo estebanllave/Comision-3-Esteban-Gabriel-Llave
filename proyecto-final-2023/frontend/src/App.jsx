@@ -21,13 +21,13 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               {/* rutas publicas */}
-              <Route path="/home" element={<HomePublic />} />
+              <Route index path="/" element={<HomePublic />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
 
               {/* rutas privadas */}
               {/* <Route element={<PrivateRoutes />}> */}
-                <Route index path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/post" element={<Post />} />
                 <Route path="/add-post" element={<NewPost />} />
                 <Route path="/profile" element={<Profile />} />

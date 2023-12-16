@@ -53,7 +53,7 @@ export const Register = () => {
               </label>
               <div className="mt-2">
                 {loginErrors.map((err, i) => (
-                  <div className="text-red-500" key={i}>
+                  <div className="text-red-800" key={i}>
                     {err}
                   </div>
                 ))}
